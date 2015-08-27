@@ -9,14 +9,19 @@ var config = {
 	dest: 'src',
 
 	scripts: [
-		'./bower_components/hmt5-boilerplate/dist/js/**/**/*.js'
+		'./bower_components/html5-boilerplate/src/js/**/*.js',
+		'./bower_components/materialize/dist/js/materialize.min.js'
 	],
 
 	css: [
-		'./bower_components/normalize.css/normalize.css'
+		'./bower_components/normalize.css/normalize.css',
+		'./bower_components/materialize/dist/css/materialize.min.css'
+	],
+
+	fonts: [
+		'./bower_components/materialize/dist/font/**/*.{ttf,woff,eof,svg}'
 	]
 }
-
 
 /*
 * Scripts Task
@@ -36,10 +41,19 @@ gulp.task('css', function () {
 	gulp.src(config.css)
 		.pipe(plumber())
 		.pipe(concat('app.min.css'))
-		// .pipe(uglify()) -- bug 
 		.pipe(minifyCss())
 		.pipe(gulp.dest(config.dest + '/css'));
 });
 
+/*
+* Fonts Task
+**/
+gulp.task('fonts', function() {
+	gulp.src(config.fonts)
+		.pipe(gulp.dest(config.dest + '/font'));
+});
 
-gulp.task('default', ['scripts', 'css']);
+/*
+* Default Task
+**/
+gulp.task('default', ['scripts', 'css', 'fonts']);
