@@ -1,0 +1,20 @@
+{
+  "name": "ontrack",
+  "version": "0.0.0",
+  "homepage": "https://github.com/karlpatrickespiritu/ontrack",
+  "authors": [
+    "karlpatrickespiritu <wiwa.espiritu@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "~0.97.0",
+    "html5-boilerplate": "~5.2.0"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "ontrack",
+  "version": "0.0.0",
+  "description": "this is a work on progres.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karlpatrickespiritu/ontrack.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karlpatrickespiritu/ontrack/issues"
+  },
+  "homepage": "https://github.com/karlpatrickespiritu/ontrack#readme",
+  "dependencies": {
+    "gulp-minify-css": "^1.2.1",
+    "gulp-plumber": "^1.0.1"
+  }
+}
