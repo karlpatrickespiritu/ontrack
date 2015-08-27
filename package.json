@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/karlpatrickespiritu/ontrack#readme",
   "dependencies": {
+    "gulp-concat": "^2.6.0",
     "gulp-minify-css": "^1.2.1",
     "gulp-plumber": "^1.0.1"
   }
