@@ -7,7 +7,6 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
         <link rel="stylesheet" href="css/app.min.css">
@@ -117,22 +116,11 @@
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
 
-        <script src="js/app.min.js"></script>
+        <script src="js/app.min.js" type="text/javascript"></script>
 
-
-        <!-- todo -->
-        <script type="text/javascript">
-            var map;
-            function initMap() {
-              map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8
-              });
-            }
+        <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBviKKl7qjJGrxzWPs32bU0k0q9fGMvEO0&callback=gmap.init">
         </script>
-        
-        <!-- google map script -->
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBviKKl7qjJGrxzWPs32bU0k0q9fGMvEO0&callback=initMap"></script>
 
     </body>
 </html>

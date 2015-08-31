@@ -9,16 +9,24 @@ var config = {
 	dest: 'src',
 
 	scripts: [
+		// vendors
 		'./bower_components/html5-boilerplate/src/js/**/*.js',
-		'./bower_components/materialize/dist/js/materialize.min.js'
+		'./bower_components/materialize/dist/js/materialize.min.js',
+		'./node_modules/mustache/mustache.min.js',
+
+		// app
+		'./src/js/pages/**/*.js',
+		'./src/js/utils/**/*.js'
 	],
 
 	css: [
+		// vendors
 		'./bower_components/normalize.css/normalize.css',
 		'./bower_components/materialize/dist/css/materialize.min.css'
 	],
 
 	fonts: [
+		//vendors
 		'./bower_components/materialize/dist/font/**/*.{ttf,woff,eof,svg}'
 	]
 }
