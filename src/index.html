@@ -11,7 +11,9 @@
 
         <link rel="stylesheet" href="css/app.min.css">
     </head>
+
     <body>
+
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -35,6 +37,13 @@
                 <div class="section">
                     <div id="map" style="height:500px"></div>
                 </div>
+
+                <div
+				  class="fb-like"
+				  data-share="true"
+				  data-width="450"
+				  data-show-faces="true">
+				</div>
             </div>
             <div class="col s6 m4">
                 <!-- sidebar -->
@@ -116,6 +125,24 @@
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
 
+        <script>
+		  window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '523864777765137',
+		      xfbml      : true,
+		      version    : 'v2.4'
+		    });
+		  };
+
+		  (function(d, s, id){
+		     var js, fjs = d.getElementsByTagName(s)[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement(s); js.id = id;
+		     js.src = "//connect.facebook.net/en_US/sdk.js";
+		     fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+		</script>
+		
         <script src="js/app.min.js" type="text/javascript"></script>
 
         <script async defer
