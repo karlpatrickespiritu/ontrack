@@ -25,23 +25,23 @@ var fb = (function () {
 	      	cookie: _oFbCredentials.bCookie
 	      });
 
-	    this.oFb.getLoginStatus(function(response) {
-	    	fb.checkLoginResponse(response);
-		});
+        this.checkLoginStatus();
 	}
 
 	/*
 	* check login user info
 	* @access public
 	**/
-	function checkLoginResponse (oLoginStatusResponse) {
-		if (oLoginStatusResponse.status === "connected") {
-			this.oFb.api('/me', function(response) {
-				console.log(response);
-		    });
-		} else {
-			console.log('facebook account not logged in');
-		}
+	function checkLoginStatus () {
+        this.oFb.getLoginStatus(function(response) {
+            if (response.status === "connected") {
+                fb.oFb.api('/me', {fields: 'friends'}, function(response) {
+                    console.log(response);
+                });
+            } else {
+                console.log('facebook account not logged in');
+            }
+        });
 	}	
 
 	/*
@@ -49,14 +49,17 @@ var fb = (function () {
 	* @access public
 	**/
 	function login () {
-		this.oFb.login(function (response) {
-			this.checkLoginResponse(response);
-		});
+		this.oFb.login(function () {
+            fb.checkLoginStatus();
+		}, {
+            scope: 'public_profile, user_friends, email, read_custom_friendlists',
+            return_scopes: true
+        });
 	}
 
 	return { 
 	  init: init,
-	  checkLoginResponse: checkLoginResponse,
+      checkLoginStatus: checkLoginStatus,
 	  login: login,
 	  oFb: oFb
 	}
