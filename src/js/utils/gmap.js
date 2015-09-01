@@ -1,4 +1,5 @@
 var gmap = (function () {
+	'use strict';
 	
 	var	$map  = $('#map'), // the DOM element map
 	 	oMap  = undefined, // the google map object
@@ -9,7 +10,11 @@ var gmap = (function () {
 			iLng: 123.891343
 		};
 
-	function init () {
+	/*
+	* initialize method
+	* @access public
+	**/
+	var init = function () {
 
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
@@ -18,7 +23,7 @@ var gmap = (function () {
 			    oUserGeo.iLng = position.coords.longitude;
 			  },
 			  function () {
-			    console.log('Geolocation not enabled.');
+			    console.log('Geolocation is not enabled on this browser.');
 			  }
 			);
 		} else {
@@ -30,14 +35,14 @@ var gmap = (function () {
 		    center: {lat: oUserGeo.iLat, lng: oUserGeo.iLng},
 		    zoom: 15
 		  });
-	}
+	};
 
-	// return public properties/methods
+
 	return {
 	  init: init,
 	  oMap: oMap,
 	  oUserGeo: oUserGeo,
-	  $map: $map,
+	  $map: $map
 	}
 
 })();

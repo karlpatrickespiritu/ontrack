@@ -18,99 +18,35 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- navbar -->
-        <nav>
-            <div class="nav-wrapper">
-              <a href="#" class="brand-logo">Logo</a>
-              <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#">Sass</a></li>
-                <li><a href="#">Components</a></li>
-                <li><a href="#">JavaScript</a></li>
-              </ul>
-            </div>
-        </nav><!-- /navbar -->
-
         <!-- page content -->
-        <div class="row">
+        <div class="row homepage">
             <div class="col s6 m8">
-                <!-- map -->
-                <div class="section">
-                    <div id="map" style="height:500px"></div>
-                </div>
-
-                <div
-				  class="fb-like"
-				  data-share="true"
-				  data-width="450"
-				  data-show-faces="true">
-				</div>
+              <!-- map -->
+              <div class="section">
+                  <div id="map" style="height:500px;"></div>
+              </div>              
             </div>
             <div class="col s6 m4">
-                <!-- sidebar -->
-                  <ul class="collection">
-                    <li class="collection-item avatar">
-                      <img src="images/yuna.jpg" alt="" class="circle">
-                      <span class="title">Title</span>
-                      <p>First Line <br>
-                         Second Line
-                      </p>
-                      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                    </li>
-                    <li class="collection-item avatar">
-                      <i class="material-icons circle">folder</i>
-                      <span class="title">Title</span>
-                      <p>First Line <br>
-                         Second Line
-                      </p>
-                      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                    </li>
-                    <li class="collection-item avatar">
-                      <i class="material-icons circle green">insert_chart</i>
-                      <span class="title">Title</span>
-                      <p>First Line <br>
-                         Second Line
-                      </p>
-                      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                    </li>
-                    <li class="collection-item avatar">
-                      <i class="material-icons circle red">play_arrow</i>
-                      <span class="title">Title</span>
-                      <p>First Line <br>
-                         Second Line
-                      </p>
-                      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                    </li>
-                  </ul>
-                  <!-- /sidebar -->          
+              <!-- pre loader -->
+              <div class="preloader-wrapper small active sidebar-preloader center-align" style="display:none">
+                <div class="spinner-layer spinner-blue-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- sidebar -->
+              <div class="section center-align">
+                <fb:login-button scope="public_profile,email" onlogin="fb.checkLogin();">
+                </fb:login-button>
+              </div>          
+              <!-- /sidebar -->
             </div>
         </div><!-- page content -->
-
-        <!-- footer -->
-        <footer class="page-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-          </div>
-        </footer><!-- footer -->
 
         <!-- SCRIPTS GO HERE -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -124,30 +60,33 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
-
-        <script>
-		  window.fbAsyncInit = function() {
-		    FB.init({
-		      appId      : '523864777765137',
-		      xfbml      : true,
-		      version    : 'v2.4'
-		    });
-		  };
-
-		  (function(d, s, id){
-		     var js, fjs = d.getElementsByTagName(s)[0];
-		     if (d.getElementById(id)) {return;}
-		     js = d.createElement(s); js.id = id;
-		     js.src = "//connect.facebook.net/en_US/sdk.js";
-		     fjs.parentNode.insertBefore(js, fjs);
-		   }(document, 'script', 'facebook-jssdk'));
-		</script>
+      
+        <!-- facebook sdk -->
+        <script type="text/javascript">
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
 		
-        <script src="js/app.min.js" type="text/javascript"></script>
-
         <script async defer
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBviKKl7qjJGrxzWPs32bU0k0q9fGMvEO0&callback=gmap.init">
         </script>
+    
+        <script>
+            // this function `window.fbAsyncInit` is run as soon as the fb sdk is loaded.
+            window.fbAsyncInit = function () { fb.init(); }
+        </script>
+
+        <script src="js/app.min.js" type="text/javascript"></script>
+
+        <!-- temporary: since running gulp on my machine is slow :/ -->
+        <script src="js/utils/fb.js"></script>
+        <script src="js/utils/gmap.js"></script>
+        <script src="js/pages/home/home.js"></script>
 
     </body>
 </html>
