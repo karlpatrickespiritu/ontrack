@@ -12,11 +12,11 @@ var config = {
 		// vendors
 		'./bower_components/html5-boilerplate/src/js/**/*.js',
 		'./bower_components/materialize/dist/js/materialize.min.js',
-		'./node_modules/mustache/mustache.min.js'
+		'./node_modules/mustache/mustache.min.js',
 		
 		// app
-		// './src/js/pages/**/*.js',
-		// './src/js/utils/**/*.js'
+		'./src/js/pages/**/*.js',
+		'./src/js/utils/**/*.js'
 	],
 
 	css: [
