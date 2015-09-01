@@ -1,3 +1,9 @@
+# NPM
 /node_modules/
-/bower_components/
 npm-debug.log
+
+# BOWER
+/bower_components/
+
+# PHPSTORM
+.idea/
