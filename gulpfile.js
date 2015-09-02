@@ -4,7 +4,6 @@ var gulp 		= require('gulp'),
 	uglify		= require('gulp-uglify'),
 	minifyCss	= require('gulp-minify-css');
 
-
 var config = {
 	dest: 'src',
 
