@@ -1,7 +1,10 @@
+'use strict';
+
 var gulp 		= require('gulp'),
 	plumber		= require('gulp-plumber'),
 	concat		= require('gulp-concat'),
 	uglify		= require('gulp-uglify'),
+    watch		= require('gulp-watch'),
 	minifyCss	= require('gulp-minify-css');
 
 
@@ -15,8 +18,10 @@ var config = {
 		'./node_modules/mustache/mustache.min.js',
 		
 		// app
-		'./src/js/pages/**/*.js',
-		'./src/js/utils/**/*.js'
+		'./src/js/config/**/*.js',
+		'./src/js/controllers/**/*.js',
+		'./src/js/services/**/*.js',
+		'./src/js/pages/**/*.js'
 	],
 
 	css: [
@@ -62,6 +67,23 @@ gulp.task('fonts', function() {
 });
 
 /*
+* Watch changes and re run tasks
+* */
+gulp.task('watch', function () {
+    watch(config.css, function () {
+    	gulp.start('css');
+	});
+
+    watch(config.scripts, function () {
+    	gulp.start('scripts');
+	});
+    
+    watch(config.fonts, function () {
+    	gulp.start('fonts');
+	});
+});
+
+/*
 * Default Task
 **/
-gulp.task('default', ['scripts', 'css', 'fonts']);
+gulp.task('default', ['scripts', 'css', 'fonts', 'watch']);

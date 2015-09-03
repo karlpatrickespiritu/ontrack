@@ -1,11 +1,9 @@
-var gmap = (function () {
-	'use strict';
-	
-	var	$map  = $('#map'), // the DOM element map
-	 	oMap  = undefined, // the google map object
+'use strict';
 
-		// temporary defaults if browser/OS doesn't support geolocation
-		oUserGeo	= {
+var GmapController = (function () {
+	
+	var	$map  		= $('#map'), 	// the DOM element map
+		oUserGeo	= { 			// temporary defaults if browser/OS doesn't support geolocation
 			iLat: 10.3028159,
 			iLng: 123.891343
 		};
@@ -14,8 +12,7 @@ var gmap = (function () {
 	* initialize method
 	* @access public
 	**/
-	var init = function () {
-
+	function init () {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
 			  function (position) {
@@ -31,7 +28,7 @@ var gmap = (function () {
 		}
 
 		// create map
-		this.oMap = new google.maps.Map(this.$map[0], {
+		new google.maps.Map(this.$map[0], {
 		    center: {lat: oUserGeo.iLat, lng: oUserGeo.iLng},
 		    zoom: 15
 		  });
@@ -40,7 +37,6 @@ var gmap = (function () {
 
 	return {
 	  init: init,
-	  oMap: oMap,
 	  oUserGeo: oUserGeo,
 	  $map: $map
 	}

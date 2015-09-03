@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="">
     <head>
-        <base href="http://ontrack.com/" target="_blank">
+        <base href="http://ontrack.com/">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title></title>
@@ -74,7 +74,7 @@
                                         </fb:login-button>-->
                                         <a href="#"
                                            scope="public_profile,user_friends,user_about_me,read_custom_friendlists"
-                                           onclick="fb.login();"><img src="img/social-icons/facebook.png" alt=""
+                                           onclick="FBController.login();"><img src="img/social-icons/facebook.png" alt=""
                                                                       width="50"/></a>
                                     </div>
                                     <div class="col m3">
@@ -133,21 +133,27 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
 
+    <!-- google map sdk -->
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBviKKl7qjJGrxzWPs32bU0k0q9fGMvEO0&callback=gmap.init"></script>
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBviKKl7qjJGrxzWPs32bU0k0q9fGMvEO0&callback=GmapController.init"></script>
+
+    <!-- app scripts -->
+    <script src="js/app.min.js" type="text/javascript"></script>
 
     <script>
-        // this function `window.fbAsyncInit` is run as soon as the fb sdk is loaded.
+        'use strict';
+
+        // this function `window.fbAsyncInit` is executed as soon as the fb sdk is loaded.
         window.fbAsyncInit = function () {
-            fb.init();
+            FBController.init();
         }
     </script>
 
-    <script src="js/app.min.js" type="text/javascript"></script>
-
     <!-- temporary: since running gulp on my machine is slow :/ -->
-    <!--<script src="js/utils/fb.js"></script>
-    <script src="js/utils/gmap.js"></script>
+    <!--<script src="js/config/FBConfig.js"></script>
+    <script src="js/controllers/FBController.js"></script>
+    <script src="js/controllers/GmapController.js"></script>
+    <script src="js/services/fb/FBUsersService.js"></script>
     <script src="js/pages/home/home.js"></script>-->
 
     </body>
