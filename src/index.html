@@ -26,7 +26,7 @@
     </nav>
 
     <!-- page content -->
-    <div class="row homepage">
+    <div class="row" id="homepage">
 
         <!-- map -->
         <div class="col s8 m8">
@@ -69,22 +69,12 @@
                             </div>
                             <div class="card-action">
                                 <div class="row">
-                                    <div class="col m3">
-                                        <!--<fb:login-button scope="public_profile,user_friends,user_about_me" onlogin="fb.checkLoginStatus();">
-                                        </fb:login-button>-->
-                                        <a href="#"
-                                           scope="public_profile,user_friends,user_about_me,read_custom_friendlists"
-                                           onclick="FBController.login();"><img src="img/social-icons/facebook.png" alt=""
-                                                                      width="50"/></a>
-                                    </div>
-                                    <div class="col m3">
-                                        <a href="#"><img src="img/social-icons/google.png" alt="" width="50"/></a>
-                                    </div>
-                                    <div class="col m3">
-                                        <a href="#"><img src="img/social-icons/twitter.png" alt="" width="50"/></a>
-                                    </div>
-                                    <div class="col m3">
-                                        <a href="#"><img src="img/social-icons/github.png" alt="" width="50"/></a>
+                                    <div class="col m12">
+                                        <form action="/login/twitter.php" method="post">
+                                            <input type="hidden" name="oauth_callback" value="http://ontrack.com/"/>
+                                            <button type="submit" class="waves-effect waves-light btn">Login Twitter</button>
+                                        </form>
+                                        <!--<a href="" id="twitter-login-btn"><img src="img/social-icons/twitter.png" alt="" width="50"/></a>-->
                                     </div>
                                 </div>
                             </div>

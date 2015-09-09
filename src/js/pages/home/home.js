@@ -1,9 +1,13 @@
+'use strict';
 (function (window, $, document) {
-	'use strict';
-
-	// page on ready
 	$(function () {
-		var $page = $('.homepage');
+		var $page            = $('#homepage'),
+            $twitterLoginBtn = $('#twitter-login-btn');
+
+        $twitterLoginBtn.on('click', function (e) {
+            e.preventDefault();
+            TwitterController.login();
+        });
+
 	});
-	
 }(window, window.jQuery, document));
