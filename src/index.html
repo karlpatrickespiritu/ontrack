@@ -1,7 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="">
     <head>
-        <base href="http://ontrack.com/">
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title></title>
@@ -10,7 +9,7 @@
 
         <!-- Place favicon.ico in the root directory -->
 
-        <link rel="stylesheet" href="css/app.min.css">
+        <link rel="stylesheet" href="assets/css/app.min.css">
     </head>
     <body>
 
@@ -128,16 +127,7 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBviKKl7qjJGrxzWPs32bU0k0q9fGMvEO0&callback=GmapController.init"></script>
 
     <!-- app scripts -->
-    <script src="js/app.min.js" type="text/javascript"></script>
-
-    <script>
-        'use strict';
-
-        // this function `window.fbAsyncInit` is executed as soon as the fb sdk is loaded.
-        window.fbAsyncInit = function () {
-            FBController.init();
-        }
-    </script>
+    <script src="assets/js/app.min.js" type="text/javascript"></script>
 
     <!-- temporary: since running gulp on my machine is slow :/ -->
     <!--<script src="js/config/FBConfig.js"></script>
