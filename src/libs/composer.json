@@ -8,6 +8,7 @@
         }
     ],
     "require": {
-        "abraham/twitteroauth": "^0.6.0"
+        "abraham/twitteroauth": "^0.6.0",
+        "mustache/mustache": "^2.9"
     }
 }
