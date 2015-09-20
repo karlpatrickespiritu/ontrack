@@ -11,5 +11,5 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 ini_set('display_errors', 'On');
 ini_set('error_log', 'error.log');
 
-include_once 'libs/vendor/mustache/mustache/src/Mustache/AutoLoader.php';
+// auto load classes. we're not going to use autoloader.
 include_once 'app/handlers/MustacheHandler.php';
