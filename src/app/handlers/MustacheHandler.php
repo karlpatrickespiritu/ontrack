@@ -2,6 +2,8 @@
 
 /**
 * a sigleton approach for the Mustache object
+*
+* @author karlpatrickespiritu <wiwa.espiritu@gmail.com>, <https://github.com/karlpatrickespiritu>
 */
 class MustacheHandler
 {
@@ -18,10 +20,13 @@ class MustacheHandler
 	* @return void
 	*/
 	protected function __construct() 
-	{
-		include_once 'libs/vendor/mustache/mustache/src/Mustache/AutoLoader.php';
+	{		
+		include_once 'app/libs/vendor/mustache/mustache/src/Mustache/AutoLoader.php';
 		Mustache_Autoloader::register();
-		self::$_oMustache = new Mustache_Engine;
+
+		self::$_oMustache = new Mustache_Engine([
+			'loader' => new Mustache_Loader_FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . '/templates')
+		]);
 	}
 
 	/**
