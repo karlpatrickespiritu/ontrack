@@ -1,68 +1,57 @@
-    <nav>
-        <div class="nav-wrapper blue-grey darken-1">
-            <a href="#" class="brand-logo center">On Track</a>
-        </div>
-    </nav>
-
-    <!-- page content -->
-    <div class="row" id="homepage">
-
-        <!-- map -->
-        <div class="col s8 m8">
-            <div class="section">
-                <div class="row">
-                    <div class="col s12">
-                        <div class="card">
-                            <div class="card-content">
-                                <div id="map" style="height:500px;"></div>
-                            </div>
-                        </div>
+<!-- map -->
+<div class="col s8 m8">
+    <div class="section">
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <div id="map" style="height:500px;"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ./map -->
-
-        <!-- sidebar -->
-        <div class="col s4 m4">
-            <!-- pre loader -->
-            <div class="preloader-wrapper small active center-align sidebar-preloader" style="display:none">
-                <div class="spinner-layer spinner-blue-only">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="gap-patch">
-                        <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                        <div class="circle"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="section center-align">
-                <div class="row">
-                    <div class="col s12">
-                        <div class="card blue-grey darken-1">
-                            <div class="card-content white-text">
-                                <span class="card-title">Login With:</span>
-                            </div>
-                            <div class="card-action">
-                                <div class="row">
-                                    <div class="col m12">
-                                        <form action="/login/twitter.php" method="post">
-                                            <input type="hidden" name="oauth_callback" value="http://ontrack.com/"/>
-                                            <button type="submit" class="waves-effect waves-light btn">Login Twitter</button>
-                                        </form>
-                                        <!--<a href="" id="twitter-login-btn"><img src="img/social-icons/twitter.png" alt="" width="50"/></a>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!-- /sidebar -->
     </div>
-    <!-- page content -->
+</div>
+<!-- ./map -->
+
+<!-- sidebar -->
+<div class="col s4 m4">
+    <!-- pre loader -->
+    <div class="preloader-wrapper small active center-align sidebar-preloader" style="display:none">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+     <!-- /pre loader -->
+    <!-- section -->
+    <div class="section center-align">
+        <div class="row">
+            <div class="col s12">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Login With:</span>
+                    </div>
+                    <div class="card-action">
+                        <div class="row">
+                            <div class="col m12">
+                                <form action="/login/twitter.php" method="post">
+                                    <input type="hidden" name="oauth_callback" value="http://ontrack.com/"/>
+                                    <button type="submit" class="waves-effect waves-light btn">Login Twitter</button>
+                                </form>
+                                <!--<a href="" id="twitter-login-btn"><img src="img/social-icons/twitter.png" alt="" width="50"/></a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- ./section -->
+</div><!-- /sidebar -->

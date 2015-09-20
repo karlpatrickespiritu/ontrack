@@ -2,8 +2,6 @@
 
 include_once 'config.php';
 
-$oMustache = MustacheHandler::i()->getMustache();
+$sContent = MustacheHandler::i()->render('home/index');
 
-echo $oMustache->render('partials/header');
-echo $oMustache->render('home/index');
-echo $oMustache->render('partials/footer');
+echo MustacheHandler::i()->render('build', ['content' => $sContent]); exit;

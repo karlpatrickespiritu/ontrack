@@ -1,10 +1,13 @@
 <?php
 
 /**
-* a sigleton approach for the Mustache object
+* sigleton for the Mustache object
 *
-* @author karlpatrickespiritu <wiwa.espiritu@gmail.com>, <https://github.com/karlpatrickespiritu>
+* @author karlpatrickespiritu <https://github.com/karlpatrickespiritu>, <wiwa.espiritu@gmail.com>
 */
+
+include_once 'app/libs/vendor/mustache/mustache/src/Mustache/AutoLoader.php';
+
 class MustacheHandler
 {
 
@@ -13,7 +16,16 @@ class MustacheHandler
 
 	// mustache instance
 	private static $_oMustache 	= null;
-	
+
+	// mustache options
+	public static $aMustacheOptions = [];
+
+	// CSS files
+	private static $_aFiles = [
+		'js' => [],
+		'css' => [],
+	];
+
 	/**
 	* constructor
 	*
@@ -21,7 +33,6 @@ class MustacheHandler
 	*/
 	protected function __construct() 
 	{		
-		include_once 'app/libs/vendor/mustache/mustache/src/Mustache/AutoLoader.php';
 		Mustache_Autoloader::register();
 
 		self::$_oMustache = new Mustache_Engine([
@@ -61,5 +72,70 @@ class MustacheHandler
 	public function getMustache () 
 	{
 		return self::$_oMustache;	
+	}
+
+
+	/**
+	* mustache's render function
+	*
+	* @return object
+	*/
+	public function render () 
+	{
+		$aParams = func_get_args();
+		return self::$_oMustache->render(@$aParams[0], @$aParams[1]);
+	}
+
+	/**
+	* add CSS files to build template
+	*
+	* @param 	mixed
+	* @return 	object
+	*/
+	public function addCSS ($mCSS) 
+	{
+		if (empty($mCSS) || !$mCSS)
+			return false;
+
+		if (is_string($mCSS))
+			self::_addFile('css', $mCSS);
+
+		if (is_array($mCSS)) {
+			foreach ($mCSS as $sCSS) {
+				self::_addFile('css', $sCSS);
+			}
+		}
+	}
+
+	/**
+	* return the added files.
+	*
+	* @return array
+	*/
+	public function getFiles () 
+	{
+		return self::$_aFiles;
+	}
+
+	/**
+	* add files.
+	*
+	* @param 	string
+	* @param 	string
+	* @return 	void
+	*/
+	private function _addFile ($sFileType, $sFilePath) 
+	{
+		if (
+			is_string($sFilePath) || 
+			is_string($sFileType) || 
+			array_key_exists($sFileType, self::$_aFiles) ||
+			!in_array($sFilePath, self::$_aFiles[$sFileType])
+		) {
+			self::$_aFiles[$sFileType][] = $sFilePath;
+			// TODO:: render files on mustache
+		}
+
+		return false;
 	}
 }
