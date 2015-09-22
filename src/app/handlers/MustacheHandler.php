@@ -29,7 +29,6 @@ class MustacheHandler
 	/**
 	* constructor
 	*
-	* @return void
 	*/
 	protected function __construct() 
 	{		
@@ -43,7 +42,6 @@ class MustacheHandler
 	/**
 	* prevent users to clone the instance
 	*
-	* @return void
 	*/
     public function __clone()
     {

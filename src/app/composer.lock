@@ -5,7 +5,6 @@
         "This file is @generated automatically"
     ],
     "hash": "30d43ddf5d4fac46b2b4a924cf9df65e",
-    "content-hash": "b623f9121a305f6e662f4532902d79e7",
     "packages": [
         {
             "name": "abraham/twitteroauth",
