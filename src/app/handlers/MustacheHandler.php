@@ -6,8 +6,6 @@
 * @author karlpatrickespiritu <https://github.com/karlpatrickespiritu>, <wiwa.espiritu@gmail.com>
 */
 
-include_once 'app/vendor/mustache/mustache/src/Mustache/AutoLoader.php';
-
 class MustacheHandler
 {
 

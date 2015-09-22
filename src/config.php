@@ -20,5 +20,5 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 ini_set('display_errors', 'On');
 ini_set('error_log', 'error.log');
 
-// auto load some classes
-include_once 'app/handlers/MustacheHandler.php';
+// composer autoload
+include_once 'app/vendor/autoload.php';
