@@ -7,7 +7,6 @@ var gulp 		= require('gulp'),
     watch		= require('gulp-watch'),
 	minifyCss	= require('gulp-minify-css');
 
-
 var config = {
 	dest: 'src',
 

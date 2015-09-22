@@ -1,14 +1,14 @@
 {
-    "name": "",
+    "name": "karlpatrickespiritu/ontrack",
+    "require": {
+        "abraham/twitteroauth": "^0.6.0",
+        "mustache/mustache": "^2.9"
+    },
     "license": "MIT",
     "authors": [
         {
             "name": "karlpatrickespiritu",
             "email": "wiwa.espiritu@gmail.com"
         }
-    ],
-    "require": {
-        "abraham/twitteroauth": "^0.6.0",
-        "mustache/mustache": "^2.9"
-    }
+    ]
 }
