@@ -35,7 +35,7 @@ class MustacheHandler
 		\Mustache_Autoloader::register();
 
 		self::$_oMustache = new \Mustache_Engine([
-			'loader' => new \Mustache_Loader_FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . '/templates')
+			'loader' => new \Mustache_Loader_FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . '/app/views')
 		]);
 	}
 
