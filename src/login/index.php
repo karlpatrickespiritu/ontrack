@@ -1,8 +1,8 @@
 <?php
 
 include_once '../config.php';
+use App\Handlers\MustacheHandler;
 
-$oMustache = MustacheHandler::i()->getMustache();
-$sContent  = $oMustache->render('login/index');
+$sContent = MustacheHandler::i()->render('login/index');
 
-echo $oMustache->render('build', ['content' => $sContent]);
+echo MustacheHandler::i()->render('build', ['content' => $sContent]);
