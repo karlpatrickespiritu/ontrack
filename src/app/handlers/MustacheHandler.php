@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Handlers;
+
 /**
 * sigleton for the Mustache object
 *
@@ -29,11 +31,11 @@ class MustacheHandler
 	*
 	*/
 	protected function __construct() 
-	{		
-		Mustache_Autoloader::register();
+	{
+		\Mustache_Autoloader::register();
 
-		self::$_oMustache = new Mustache_Engine([
-			'loader' => new Mustache_Loader_FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . '/templates')
+		self::$_oMustache = new \Mustache_Engine([
+			'loader' => new \Mustache_Loader_FilesystemLoader($_SERVER['DOCUMENT_ROOT'] . '/templates')
 		]);
 	}
 

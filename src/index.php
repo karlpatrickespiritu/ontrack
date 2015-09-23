@@ -1,6 +1,7 @@
 <?php
 
 include_once 'config.php';
+use App\Handlers\MustacheHandler;
 
 $sContent = MustacheHandler::i()->render('home/index');
 
