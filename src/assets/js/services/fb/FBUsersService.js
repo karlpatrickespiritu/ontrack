@@ -5,7 +5,7 @@ var FBUsersService = (function () {
         getById: getById
     };
 
-    function getById () {
+    function getById() {
         return 'test';
     }
 
