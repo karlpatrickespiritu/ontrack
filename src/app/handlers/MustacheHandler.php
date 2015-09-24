@@ -1,7 +1,7 @@
 <?php
 
 /**
- * sigleton for the Mustache object
+ * singleton handler for the Mustache
  *
  * @author karlpatrickespiritu <https://github.com/karlpatrickespiritu>, <wiwa.espiritu@gmail.com>
  */

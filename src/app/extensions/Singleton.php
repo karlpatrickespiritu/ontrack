@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Extensions;
+use ReflectionClass;
 
 class Singleton
 {

@@ -2,7 +2,8 @@
     "name": "karlpatrickespiritu/ontrack",
     "require": {
         "abraham/twitteroauth": "^0.6.0",
-        "mustache/mustache": "^2.9"
+        "mustache/mustache": "^2.9",
+        "illuminate/http": "^5.1"
     },
     "license": "MIT",
     "authors": [

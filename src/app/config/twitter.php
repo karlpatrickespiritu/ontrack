@@ -7,6 +7,7 @@ return [
             'secret' => 'NU1YDQhju3STuOjAGey51ToIGWuddNmGAmlxwbUlP287tsACBk',
             'owner' => 'espiritu_karl',
             'owner_id' => '1570030916',
+            'callback_url' => 'http://ontrack.com/login/twitter',
         ],
         'access' => [
             'token' => '1570030916-Rau5BIZQG6VcNkngrl74ecWynehfa2tFPFjwiZz',
