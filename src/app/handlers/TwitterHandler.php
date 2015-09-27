@@ -122,20 +122,38 @@ class TwitterHandler extends Singleton
     {
         if (!empty($sOathVerifier) && !empty($sOathToken) && $sOathToken === $_SESSION['oauth_token']) {
             $aAccessToken = $this->getAccessToken($sOathVerifier);
-            $_SESSION['access_token'] = $aAccessToken;
+            if (isset($aAccessToken['oauth_token']) && isset($aAccessToken['oauth_token_secret'])) {
+                $_SESSION['access_token'] = $aAccessToken;
 
-            // re-instantiate twitteroath library using the oauth_token & oauth_token_secret
-            $this->_oTwitterOAth = new TwitterOAuth(
-                $this->_aConfig['API']['app']['key'],
-                $this->_aConfig['API']['app']['secret'],
-                $aAccessToken['oauth_token'],
-                $aAccessToken['oauth_token_secret']
-            );
+                // re-instantiate twitteroath library using the oauth_token & oauth_token_secret
+                $this->_oTwitterOAth = new TwitterOAuth(
+                    $this->_aConfig['API']['app']['key'],
+                    $this->_aConfig['API']['app']['secret'],
+                    $aAccessToken['oauth_token'],
+                    $aAccessToken['oauth_token_secret']
+                );
 
-            $aUser = $this->_oTwitterOAth->get("account/verify_credentials");
-            var_dump($aUser); exit;
+                // GOTO home :)
+            }
         }
 
         return false;
     }
+
+    /**
+     * get logged in basic user data
+     *
+     * @param   string  
+     * @return  array
+     * */
+    public function getUserBasicData()
+    {
+        $aUser = $this->_oTwitterOAth->get("account/verify_credentials");
+        if ($this->_oTwitterOAth->getLastHttpCode() === 200) {
+            return $aUser;
+        }
+
+        return false;
+    }
+
 }
