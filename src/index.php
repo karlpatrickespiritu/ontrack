@@ -2,7 +2,6 @@
 
 include_once 'app/bootstrap.php';
 use App\Handlers\MustacheHandler;
-use App\Handlers\TwitterOAuthHandler;
 
 $sContent = MustacheHandler::i()->render('home/index');
 

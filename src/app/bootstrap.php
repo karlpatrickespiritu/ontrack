@@ -14,7 +14,7 @@ ini_set('default_charset', 'utf-8');
 // ERRORS
 error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 ini_set('display_errors', 'On');
-ini_set('error_log', 'error.log');
+ini_set('error_log', 'app/error.log');
 
 // autoloaders
 include_once 'app/vendor/autoload.php';
