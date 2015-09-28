@@ -1,20 +1,20 @@
 <?php
+
 /**
  * Singleton handler for the TwitterOAuth
  *
  * @author karlpatrickespiritu <https://github.com/karlpatrickespiritu>, <wiwa.espiritu@gmail.com>
- */
+ **/
 
 namespace App\Handlers;
 
 use App\Extensions\Singleton;
 use App\Interfaces\SocialMediaAPIAuth;
+use App\Config\Api\TwitterAPI;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 class TwitterHandler extends Singleton implements SocialMediaAPIAuth
 {
-    // twitter API config
-    private $_aConfig = [];
 
     // the twitterOAth instance
     private $_oTwitterOAth = null;
@@ -27,23 +27,7 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
     protected function __construct()
     {
         session_start();
-        $aConfig = $this->getConfig();
-
-        // default bootstrap initialization for TwitterOath library 
-        $this->_oTwitterOAth = new TwitterOAuth(
-            $aConfig['API']['app']['key'],
-            $aConfig['API']['app']['secret']
-        );
-    }
-
-    /**
-     * Returns our Twitter configuration.
-     *
-     * @return array
-     * */
-    public function getConfig()
-    {
-        return (array) $this->_aConfig = include_once 'app/config/twitter.php';
+        $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET);
     }
 
     /**
@@ -70,12 +54,12 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
     }
 
     /**
-     * Execute logout to twitter.
+     * End the api session.
      *
      * @return mixed
      * */
-    public function logout() {}
-    
+    public function endSession() {}
+
     /**
      * Obtain a request token.
      *
@@ -84,8 +68,7 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
      * */
     public function getRequestToken()
     {
-        $sCallBackUrl = $this->_aConfig['API']['app']['callback_url'];
-        return $this->_oTwitterOAth->oauth('oauth/request_token', ['oauth_callback' => $sCallBackUrl]);
+        return $this->_oTwitterOAth->oauth('oauth/request_token', ['oauth_callback' => TwitterAPI::CALLBACK_URL]);
     }
 
     /**
@@ -101,14 +84,8 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
         $sOathToken       = (isset($_SESSION['oauth_token'])) ? $_SESSION['oauth_token']: '';
         $sOathTokenSecret = (isset($_SESSION['oauth_token_secret'])) ? $_SESSION['oauth_token_secret']: '';
 
-        if ($sOathToken || $sOathTokenSecret || !empty($sOathVerifier)) {
-            // re-instantiate twitteroath library using the oauth_token & oauth_token_secret
-            $this->_oTwitterOAth = new TwitterOAuth(
-                $this->_aConfig['API']['app']['key'],
-                $this->_aConfig['API']['app']['secret'],
-                $sOathToken,
-                $sOathTokenSecret
-            );
+        if (!empty($sOathVerifier) || $sOathToken || $sOathTokenSecret) {
+            $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET, $sOathToken, $sOathTokenSecret);
 
             return $this->_oTwitterOAth->oauth('oauth/access_token', ['oauth_verifier' => $sOathVerifier]);
         }
@@ -133,15 +110,10 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
             if (isset($aAccessToken['oauth_token']) && isset($aAccessToken['oauth_token_secret'])) {
                 $_SESSION['access_token'] = $aAccessToken;
 
-                // re-instantiate twitteroath library using the oauth_token & oauth_token_secret
-                $this->_oTwitterOAth = new TwitterOAuth(
-                    $this->_aConfig['API']['app']['key'],
-                    $this->_aConfig['API']['app']['secret'],
-                    $aAccessToken['oauth_token'],
-                    $aAccessToken['oauth_token_secret']
-                );
+                $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET, $aAccessToken['oauth_token'], $aAccessToken['oauth_token_secret']);
 
                 // GOTO home :)
+                var_dump($this->getUserBasicData()); exit;
             }
         }
 
@@ -149,7 +121,7 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
     }
 
     /**
-     * get logged in basic user data
+     * get logged in user basic data
      *
      * @param   string  
      * @return  array
@@ -163,5 +135,4 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
 
         return false;
     }
-
 }

@@ -12,9 +12,9 @@ interface SocialMediaAPIAuth
 	public function login();
 	
 	/**
-     * implement logout
+     * End the api session.
      *
      * @return mixed
      **/
-	public function logout();
+	public function endSession();
 }
