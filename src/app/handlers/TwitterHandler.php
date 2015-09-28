@@ -8,9 +8,10 @@
 namespace App\Handlers;
 
 use App\Extensions\Singleton;
+use App\Interfaces\SocialMediaAPIAuth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
-class TwitterHandler extends Singleton
+class TwitterHandler extends Singleton implements SocialMediaAPIAuth
 {
     // twitter API config
     private $_aConfig = [];
@@ -51,7 +52,7 @@ class TwitterHandler extends Singleton
      * @see https://dev.twitter.com/web/sign-in/implementing
      * @see https://twitteroauth.com/redirect.php
      * */
-    public function redirectLogin()
+    public function login()
     {
         // TODO: create a singleton $_SESSION class or find a library.
         session_start();
@@ -68,6 +69,13 @@ class TwitterHandler extends Singleton
         return false;
     }
 
+    /**
+     * Execute logout to twitter.
+     *
+     * @return mixed
+     * */
+    public function logout() {}
+    
     /**
      * Obtain a request token.
      *

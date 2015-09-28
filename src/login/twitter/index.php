@@ -11,5 +11,5 @@ $sOathVerifier  = $oRequest->input('oauth_verifier', '');
 if ($sOathToken !== '' && $sOathVerifier !== '') {
 	TwitterHandler::i()->handleLoginCallback($sOathToken, $sOathVerifier);
 } else {
-    TwitterHandler::i()->redirectLogin();
+    TwitterHandler::i()->login();
 }
