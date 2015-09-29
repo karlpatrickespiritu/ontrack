@@ -31,7 +31,7 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
     }
 
     /**
-     * Redirects the user to Twitter's API login page. 
+     * Redirects the user to Twitter's API login page.
      *
      * @see https://dev.twitter.com/web/sign-in/implementing
      * @see https://twitteroauth.com/redirect.php
@@ -41,9 +41,9 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
         // TODO: create a singleton $_SESSION class or find a library.
         session_start();
 
-        $aRequestToken    = $this->getRequestToken();
-        $sOathToken       = (isset($aRequestToken['oauth_token'])) ? $_SESSION['oauth_token'] = $aRequestToken['oauth_token']: '';
-        $sOathTokenSecret = (isset($aRequestToken['oauth_token_secret'])) ? $_SESSION['oauth_token_secret'] = $aRequestToken['oauth_token_secret']: '';
+        $aRequestToken = $this->getRequestToken();
+        $sOathToken = (isset($aRequestToken['oauth_token'])) ? $_SESSION['oauth_token'] = $aRequestToken['oauth_token'] : '';
+        $sOathTokenSecret = (isset($aRequestToken['oauth_token_secret'])) ? $_SESSION['oauth_token_secret'] = $aRequestToken['oauth_token_secret'] : '';
 
         if ($sOathToken && $sOathTokenSecret) {
             $sTwitterLoginUrl = $this->_oTwitterOAth->url('oauth/authorize', ['oauth_token' => $sOathToken]);
@@ -58,7 +58,9 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
      *
      * @return mixed
      * */
-    public function endSession() {}
+    public function endSession()
+    {
+    }
 
     /**
      * Obtain a request token.
@@ -75,14 +77,14 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
      * Obtain a access token.
      *
      * @see     https://dev.twitter.com/web/sign-in/implementing
-     * @param   string  
+     * @param   string
      * @return  array
      * */
     public function getAccessToken($sOathVerifier)
     {
         session_start();
-        $sOathToken       = (isset($_SESSION['oauth_token'])) ? $_SESSION['oauth_token']: '';
-        $sOathTokenSecret = (isset($_SESSION['oauth_token_secret'])) ? $_SESSION['oauth_token_secret']: '';
+        $sOathToken = (isset($_SESSION['oauth_token'])) ? $_SESSION['oauth_token'] : '';
+        $sOathTokenSecret = (isset($_SESSION['oauth_token_secret'])) ? $_SESSION['oauth_token_secret'] : '';
 
         if (!empty($sOathVerifier) || $sOathToken || $sOathTokenSecret) {
             $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET, $sOathToken, $sOathTokenSecret);
@@ -94,7 +96,7 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
     }
 
     /**
-     * After user has successfully logged in to Twitter, Twitter returns to our `oath_callback` url with 
+     * After user has successfully logged in to Twitter, Twitter returns to our `oath_callback` url with
      * some `$_GET` params including an `oath_verifier` which will be used to get the access_token later.
      * This function handles that Twitter return and sets the users's session on the app. If this function
      * runs successfully, we are now authorized to get the user's Twitter data.
@@ -113,7 +115,8 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
                 $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET, $aAccessToken['oauth_token'], $aAccessToken['oauth_token_secret']);
 
                 // GOTO home :)
-                var_dump($this->getUserBasicData()); exit;
+                var_dump($this->getUserBasicData());
+                exit;
             }
         }
 
@@ -123,7 +126,7 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
     /**
      * get logged in user basic data
      *
-     * @param   string  
+     * @param   string
      * @return  array
      * */
     public function getUserBasicData()

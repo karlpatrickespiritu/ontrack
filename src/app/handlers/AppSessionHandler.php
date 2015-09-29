@@ -15,38 +15,38 @@ use App\Extensions\Singleton;
 use App\Utils\Security;
 
 class AppSessionHandler extends Singleton
-{	 
-	public $_bLoggedIn = false;
+{
+    public $_bLoggedIn = false;
 
-	protected function __construct()
-	{
-		session_start();
-	}
+    protected function __construct()
+    {
+        session_start();
+    }
 
-	public function __destruct()
-	{
-		$this->stop();
-	}
+    public function __destruct()
+    {
+        $this->stop();
+    }
 
-	public function stop()
-	{
-		session_unset();
-		session_destroy();
-		session_register_shutdown();
-	}
+    public function stop()
+    {
+        session_unset();
+        session_destroy();
+        session_register_shutdown();
+    }
 
-	public function start()
-	{
-		session_regenerate_id();
-	}
+    public function start()
+    {
+        session_regenerate_id();
+    }
 
-	public function set($sKey, $mValue)
-	{
-		return $_SESSION[$sKey] = $mValue;
-	}
+    public function set($sKey, $mValue)
+    {
+        return $_SESSION[$sKey] = $mValue;
+    }
 
-	public function get($sKey, $mValue)
-	{
-		return $_SESSION[$sKey]; 
-	}
+    public function get($sKey, $mValue)
+    {
+        return $_SESSION[$sKey];
+    }
 }

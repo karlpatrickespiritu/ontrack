@@ -9,12 +9,12 @@ interface SocialMediaAPIAuth
      *
      * @return mixed
      **/
-	public function login();
-	
-	/**
+    public function login();
+
+    /**
      * End the api session.
      *
      * @return mixed
      **/
-	public function endSession();
+    public function endSession();
 }
