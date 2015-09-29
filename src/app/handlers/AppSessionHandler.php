@@ -1,10 +1,52 @@
 <?php
 
+/**
+ * This is just a very simple wrapper for PHP's Session.
+ *
+ * TODO: Implement appropriate security measures to prevent
+ * session hijacking. Or just implement a PHP session library :)
+ *
+ * @author karlpatrickespiritu <https://github.com/karlpatrickespiritu>, <wiwa.espiritu@gmail.com>
+ */
+
 namespace App\Handlers;
 
-use App\Extentions\Singleton;
+use App\Extensions\Singleton;
+use App\Utils\Security;
 
-class AppSessionHandler extends Singleton implements SessionHandler 
-{
-	
+class AppSessionHandler extends Singleton
+{	 
+	public $_bLoggedIn = false;
+
+	protected function __construct()
+	{
+		session_start();
+	}
+
+	public function __destruct()
+	{
+		$this->stop();
+	}
+
+	public function stop()
+	{
+		session_unset();
+		session_destroy();
+		session_register_shutdown();
+	}
+
+	public function start()
+	{
+		session_regenerate_id();
+	}
+
+	public function set($sKey, $mValue)
+	{
+		return $_SESSION[$sKey] = $mValue;
+	}
+
+	public function get($sKey, $mValue)
+	{
+		return $_SESSION[$sKey]; 
+	}
 }

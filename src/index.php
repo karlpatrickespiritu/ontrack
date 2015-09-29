@@ -2,6 +2,7 @@
 
 include_once 'app/bootstrap.php';
 use App\Handlers\MustacheHandler;
+use App\Handlers\AppSessionHandler;
 
 $sContent = MustacheHandler::i()->render('home/index');
 

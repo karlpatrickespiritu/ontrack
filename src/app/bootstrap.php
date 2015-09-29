@@ -19,3 +19,5 @@ ini_set('error_log', 'app/error.log');
 // autoloaders
 include_once 'app/vendor/autoload.php';
 include_once 'app/vendor/abraham/twitteroath/autoload.php';
+
+use App\Handlers\AppSessionHandler;
