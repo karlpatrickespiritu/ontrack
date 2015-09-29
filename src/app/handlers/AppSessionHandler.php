@@ -16,8 +16,6 @@ use App\Utils\Security;
 
 class AppSessionHandler extends Singleton
 {
-    public $_bLoggedIn = false;
-
     protected function __construct()
     {
         session_start();
@@ -28,13 +26,6 @@ class AppSessionHandler extends Singleton
         session_unset();
         session_destroy();
         session_register_shutdown();
-    }
-
-    /**
-     * TODO: start user session
-     */
-    public function start()
-    {
     }
 
     public function set($sKey, $mValue)
@@ -49,6 +40,6 @@ class AppSessionHandler extends Singleton
 
     public function remove($sKey)
     {
-        return $_SESSION[$sKey];
+        unset($_SESSION[$sKey]);
     }
 }
