@@ -5,7 +5,7 @@ namespace App\Interfaces;
 interface SocialMediaAPIAuth
 {
     /**
-     * implement login
+     * Implement login
      *
      * @return mixed
      **/
@@ -17,4 +17,11 @@ interface SocialMediaAPIAuth
      * @return mixed
      **/
     public function endSession();
+
+    /**
+     * Check if user has logged in using a social media.
+     *
+     * @return bool
+     */
+    public function hasLoggedIn();
 }

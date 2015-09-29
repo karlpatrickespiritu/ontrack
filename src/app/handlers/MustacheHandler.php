@@ -15,10 +15,15 @@ use Mustache_Loader_FilesystemLoader;
 
 class MustacheHandler extends Singleton
 {
-    // mustache instance
+    /**
+     * Mustache instance
+     * @var Mustache_Engine|null
+     */
     private $_oMustache = null;
 
-    // Assets to be loaded by mustache
+    /**
+     * @var array $_aAssets
+     */
     private $_aAssets = [
         'js' => [],
         'css' => [],
@@ -50,7 +55,7 @@ class MustacheHandler extends Singleton
     /**
      * mustache's render function
      *
-     * @return object
+     * @return  object
      */
     public function render()
     {
@@ -61,8 +66,8 @@ class MustacheHandler extends Singleton
     /**
      * add ccs files to mustache template
      *
-     * @param    mixed
-     * @return    object
+     * @param   mixed
+     * @return  object
      */
     public function addCSS($mCSS)
     {
@@ -94,9 +99,9 @@ class MustacheHandler extends Singleton
     /**
      * add assets.
      *
-     * @param    string
-     * @param    string
-     * @return    void
+     * @param   string
+     * @param   string
+     * @return  mixed
      */
     private function _addAssets($sFileType, $sFilePath)
     {
@@ -106,7 +111,7 @@ class MustacheHandler extends Singleton
             array_key_exists($sFileType, $this->_aAssets) &&
             !in_array($sFilePath, $this->_aAssets[$sFileType])
         ) {
-            $this->_aAssets[$sFileType][] = $sFilePath;
+            return $this->_aAssets[$sFileType][] = $sFilePath;
             // TODO:: render files on mustache
         }
 

@@ -23,11 +23,6 @@ class AppSessionHandler extends Singleton
         session_start();
     }
 
-    public function __destruct()
-    {
-        $this->stop();
-    }
-
     public function stop()
     {
         session_unset();
@@ -35,9 +30,11 @@ class AppSessionHandler extends Singleton
         session_register_shutdown();
     }
 
+    /**
+     * TODO: start user session
+     */
     public function start()
     {
-        session_regenerate_id();
     }
 
     public function set($sKey, $mValue)
@@ -45,7 +42,12 @@ class AppSessionHandler extends Singleton
         return $_SESSION[$sKey] = $mValue;
     }
 
-    public function get($sKey, $mValue)
+    public function get($sKey)
+    {
+        return $_SESSION[$sKey];
+    }
+
+    public function remove($sKey)
     {
         return $_SESSION[$sKey];
     }
