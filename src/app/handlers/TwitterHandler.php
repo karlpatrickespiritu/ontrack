@@ -41,13 +41,17 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
      */
     protected function __construct()
     {
-        $this->_initializeTwitterOauth(self::OAUTH_BASIC);
+        if ($this->getLoggedInAccessToken()) {
+            $this->_initializeTwitterOauth(self::OAUTH_VERIFIED);
+        } else {
+            $this->_initializeTwitterOauth(self::OAUTH_BASIC);
+        }
     }
 
     /**
      * Initialize TwitterOauth depending is the user is logged in or not.
      *
-     * @param   init  $sOathType the type of initizalization of TwitterOath
+     * @param   int  $sOathType the type of initizalization of TwitterOath
      * @return  bool
      */
     private function _initializeTwitterOauth($sOathType = self::OAUTH_BASIC)
@@ -197,6 +201,8 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
      */
     public function getUserBasicData()
     {
+        $statuses = $this->_oTwitterOAth->get("statuses/home_timeline", array("count" => 25, "exclude_replies" => true));
+        d($statuses); exit;
         $aUser = $this->_oTwitterOAth->get("account/verify_credentials");
         if ($this->_oTwitterOAth->getLastHttpCode() === 200) {
             return $aUser;

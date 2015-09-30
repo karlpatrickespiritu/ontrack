@@ -3,7 +3,6 @@
 include_once '../../app/bootstrap.php';
 
 use App\Handlers\TwitterHandler;
-use App\Handlers\AppSessionHandler;
 use Illuminate\Http\Request;
 use App\Utils\URL;
 
