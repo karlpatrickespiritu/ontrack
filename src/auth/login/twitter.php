@@ -15,6 +15,7 @@ if (TwitterHandler::i()->hasLoggedIn()) {
     URL::redirect('/');
 } elseif ($sOathToken !== '' && $sOathVerifier !== '') {
     if (TwitterHandler::i()->handleLoginCallback($sOathToken, $sOathVerifier)) {
+    	d(TwitterHandler::i()->getUserBasicData()); exit;
         URL::redirect('/');
     }
 } else {

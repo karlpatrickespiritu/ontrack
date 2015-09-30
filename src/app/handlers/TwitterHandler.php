@@ -26,28 +26,52 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
     private $_oTwitterOAth = null;
 
     /**
+     * types of twitteroauth initialization.
+     * @var int
+     */
+    const OAUTH_BASIC = 0;
+    const OAUTH_VERIFIED = 1;
+    const OAUTH_VERIFIER = 2;
+    const OAUTH_VERIFIER_CONVERTED = 3;
+
+    /**
      * Protected constructor so that this class cannot be instantiated.
      *
      * @see https://dev.twitter.com/web/sign-in/implementing
      */
     protected function __construct()
     {
-        $this->_initializeTwitterOauth();
+        $this->_initializeTwitterOauth(self::OAUTH_BASIC);
     }
 
     /**
      * Initialize TwitterOauth depending is the user is logged in or not.
+     *
+     * @param   init  $sOathType the type of initizalization of TwitterOath
+     * @return  bool
      */
-    private function _initializeTwitterOauth()
+    private function _initializeTwitterOauth($sOathType = self::OAUTH_BASIC)
     {
-        if ($this->hasLoggedIn()) {
-            $aAccessToken = $this->getAccessToken();
-            $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET, $aAccessToken['oauth_token'], $aAccessToken['oauth_token_secret']);
-        } else {
+        if ($sOathType == self::OAUTH_BASIC) {
             $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET);
+        } elseif ($sOathType == self::OAUTH_VERIFIED) {
+            $aAccessToken = $this->getLoggedInAccessToken();
+            $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET, $aAccessToken['oauth_token'], $aAccessToken['oauth_token_secret']);
+        } elseif ($sOathType == self::OAUTH_VERIFIER) {
+            $sOathToken = AppSessionHandler::i()->get('oauth_token');
+            $sOathTokenSecret = AppSessionHandler::i()->get('oauth_token_secret');
+            $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET, $sOathToken, $sOathTokenSecret);
+        } elseif ($sOathType == self::OAUTH_VERIFIER_CONVERTED) {
+            $sOathVerifier = AppSessionHandler::i()->get('oauth_verifier');
+            $aAccessToken = $this->getAccessToken($sOathVerifier);
+            if (isset($aAccessToken['oauth_token']) && isset($aAccessToken['oauth_token_secret'])) {
+                $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET, $aAccessToken['oauth_token'], $aAccessToken['oauth_token_secret']);
+            }
         }
 
         $this->_oTwitterOAth->setTimeouts(10, 15);
+
+        return $this->_oTwitterOAth instanceof TwitterOAuth;
     }
 
     /**
@@ -77,6 +101,7 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
     {
         AppSessionHandler::i()->remove('oauth_token');
         AppSessionHandler::i()->remove('oauth_token_secret');
+        AppSessionHandler::i()->remove('oauth_verifier');
         AppSessionHandler::i()->remove('access_token');
         URL::redirect($sUrlRedirect);
     }
@@ -108,17 +133,14 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
      * @param   string
      * @return  mixed
      */
-    public function getLoginAccessToken($sOathVerifier)
+    public function getAccessToken($sOathVerifier)
     {
-        $sOathToken = AppSessionHandler::i()->get('oauth_token');
-        $sOathTokenSecret = AppSessionHandler::i()->get('oauth_token_secret');
-
-        if ($sOathVerifier || $sOathToken || $sOathTokenSecret) {
-            $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET, $sOathToken, $sOathTokenSecret);
-            $this->_oTwitterOAth->setTimeouts(10, 15);
+        if ($sOathVerifier) {
+            $this->_initializeTwitterOauth(self::OAUTH_VERIFIER);
 
             $aAccessToken = $this->_oTwitterOAth->oauth('oauth/access_token', ['oauth_verifier' => $sOathVerifier]);
             if ($this->_oTwitterOAth->getLastHttpCode() === 200) {
+                AppSessionHandler::i()->set('access_token', $aAccessToken);
                 return $aAccessToken;
             }
         }
@@ -140,15 +162,8 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
     public function handleLoginCallback($sOathToken, $sOathVerifier)
     {
         if (!empty($sOathVerifier) && !empty($sOathToken) && ($sOathToken === AppSessionHandler::i()->get('oauth_token'))) {
-            $aAccessToken = $this->getLoginAccessToken($sOathVerifier);
-            if (isset($aAccessToken['oauth_token']) && isset($aAccessToken['oauth_token_secret'])) {
-                AppSessionHandler::i()->set('access_token', $aAccessToken);
-
-                $this->_oTwitterOAth = new TwitterOAuth(TwitterAPI::KEY, TwitterAPI::SECRET, $aAccessToken['oauth_token'], $aAccessToken['oauth_token_secret']);
-                $this->_oTwitterOAth->setTimeouts(10, 15);
-
-                return $this->_oTwitterOAth instanceof TwitterOAuth;
-            }
+            AppSessionHandler::i()->set('oauth_verifier', $sOathVerifier);
+            return $this->_initializeTwitterOauth(self::OAUTH_VERIFIER_CONVERTED);
         }
 
         return false;
@@ -169,7 +184,7 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
      *
      * @return mixed
      */
-    public function getAccessToken()
+    public function getLoggedInAccessToken()
     {
         return AppSessionHandler::i()->get('access_token');
     }
