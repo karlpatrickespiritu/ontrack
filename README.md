@@ -1,2 +1,2 @@
 # ontrack
-an app made with Google Maps API together Twitter API.. Coming Soon :relaxed:
+An app made with :heart: using Twitter API.. Coming Soon :relaxed:
