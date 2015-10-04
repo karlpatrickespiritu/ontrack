@@ -2,12 +2,14 @@
 (function (window, $, document) {
     $(function () {
         var $page = $('#homepage'),
-            $twitterLoginBtn = $('#twitter-login-btn');
+        	oFeeds = {};
 
-        $twitterLoginBtn.on('click', function (e) {
-            e.preventDefault();
-            TwitterController.login();
-        });
+        TwitterFeedService
+        	.getFeed()
+        	.then(function(response) {
+        		oFeeds = response;
+        		console.log(oFeeds);
+        	});
 
     });
 }(window, window.jQuery, document));

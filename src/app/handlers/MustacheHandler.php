@@ -64,6 +64,16 @@ class MustacheHandler extends Singleton
     }
 
     /**
+     * show template
+     *
+     */
+    public function show()
+    {
+        $aParams = func_get_args();
+        echo $this->_oMustache->render(@$aParams[0], @$aParams[1]); exit;
+    }
+
+    /**
      * add ccs files to mustache template
      *
      * @param   mixed

@@ -5,6 +5,11 @@ include_once 'app/bootstrap.php';
 use App\Handlers\MustacheHandler;
 use App\Handlers\TwitterHandler;
 
-$sContent = MustacheHandler::i()->render('home/index');
+$oMustache = MustacheHandler::i();
+$oTwitter = TwitterHandler::i();
 
-echo MustacheHandler::i()->render('build', ['content' => $sContent]);
+$sContent = $oMustache->render('home/index', [
+	'bLoggedIn' => $oTwitter->hasLoggedIn(),
+]);
+
+$oMustache->show('build', ['content' => $sContent]);

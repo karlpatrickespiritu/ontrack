@@ -35,7 +35,7 @@ var config = {
     ]
 }
 
-/*
+/**
  * Scripts Task
  **/
 gulp.task('scripts', function () {
@@ -46,7 +46,7 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest(config.dest + '/js'));
 });
 
-/*
+/**
  * CSS Task
  **/
 gulp.task('css', function () {
@@ -57,7 +57,7 @@ gulp.task('css', function () {
         .pipe(gulp.dest(config.dest + '/css'));
 });
 
-/*
+/**
  * Fonts Task
  **/
 gulp.task('fonts', function () {
@@ -65,7 +65,7 @@ gulp.task('fonts', function () {
         .pipe(gulp.dest(config.dest + '/font'));
 });
 
-/*
+/**
  * Watch changes and re run tasks
  * */
 gulp.task('watch', function () {
@@ -82,7 +82,7 @@ gulp.task('watch', function () {
     });
 });
 
-/*
+/**
  * Default Task
  **/
 gulp.task('default', ['scripts', 'css', 'fonts', 'watch']);

@@ -210,4 +210,19 @@ class TwitterHandler extends Singleton implements SocialMediaAPIAuth
 
         return false;
     }
+
+    /**
+     * get user's twitter feed
+     *
+     * @return  array|bool
+     */
+    public function getFeed()
+    {
+        $oFeed = $this->_oTwitterOAth->get("statuses/home_timeline", ["count" => 25, "exclude_replies" => true]);
+        if ($this->_oTwitterOAth->getLastHttpCode() === 200) {
+            return $oFeed;
+        }
+
+        return false;
+    }
 }
