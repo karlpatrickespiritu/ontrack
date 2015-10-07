@@ -8,7 +8,7 @@ var gulp        = require('gulp'),
     minifyCss   = require('gulp-minify-css');
 
 var config = {
-    dest: 'web',
+    dest: 'web/assets',
 
     scripts: [
         // vendors
@@ -17,10 +17,10 @@ var config = {
         './node_modules/mustache/mustache.min.js',
 
         // app
-        './web/js/config/**/*.js',
-        './web/js/controllers/**/*.js',
-        './web/js/services/**/*.js',
-        './web/js/pages/**/*.js'
+        './web/assets/js/config/**/*.js',
+        './web/assets/js/controllers/**/*.js',
+        './web/assets/js/services/**/*.js',
+        './web/assets/js/pages/**/*.js'
     ],
 
     css: [

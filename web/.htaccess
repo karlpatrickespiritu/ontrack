@@ -46,5 +46,6 @@ RewriteCond %{REQUEST_FILENAME} !-d
 ### END OF REDIRECTS ###
 
 ## Login
+RewriteRule ^login?$ auth/loginpage.php [QSA,L]
 RewriteRule ^login/twitter?$ auth/login/twitter.php [QSA,L]
 RewriteRule ^logout?$ auth/logout.php [QSA,L]

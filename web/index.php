@@ -4,12 +4,14 @@ include_once 'app/bootstrap.php';
 
 use App\Handlers\MustacheHandler;
 use App\Handlers\TwitterHandler;
+use App\Utils\URL;
 
-$oMustache = MustacheHandler::i();
-$oTwitter = TwitterHandler::i();
+if (!TwitterHandler::i()->hasLoggedIn()) {
+    URL::redirect('/login');
+}
 
-$sContent = $oMustache->render('home/index', [
-	'bLoggedIn' => $oTwitter->hasLoggedIn(),
+$sContent = MustacheHandler::i()->render('home/index', [
+	'bLoggedIn' => TwitterHandler::i()->hasLoggedIn(),
 ]);
 
-$oMustache->show('build', ['content' => $sContent]);
+MustacheHandler::i()->show('build', ['content' => $sContent]);
