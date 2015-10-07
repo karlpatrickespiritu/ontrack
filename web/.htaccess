@@ -12,10 +12,6 @@ RewriteRule ^(.*)$ http://ontrack.com/$1 [R=301,L]
 RewriteEngine On
 RewriteBase /
 
-## PHP values
-php_value upload_max_filesize 40M
-php_value post_max_size 40M
-
 ## Error Documents
 ## If is installed in a subfolder, change the below line to ErrorDocument 404 /name-of-subfolder/error_404.php
 ErrorDocument 404 /http-errors/404.php
