@@ -8,7 +8,6 @@
         	.getFeed()
         	.then(function(response) {
         		oFeeds = response;
-        		console.log(oFeeds);
         	});
 
     });

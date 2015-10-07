@@ -1,11 +1,12 @@
 'use strict';
 
-var gulp        = require('gulp'),
-    plumber     = require('gulp-plumber'),
-    concat      = require('gulp-concat'),
-    uglify      = require('gulp-uglify'),
-    watch       = require('gulp-watch'),
-    minifyCss   = require('gulp-minify-css');
+var gulp = require('gulp'),
+    plumber = require('gulp-plumber'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify'),
+    watch = require('gulp-watch'),
+    minifyCss = require('gulp-minify-css'),
+    sass = require('gulp-sass');
 
 var config = {
     dest: 'web/assets',
@@ -29,6 +30,10 @@ var config = {
         './bower_components/materialize/dist/css/materialize.min.css'
     ],
 
+    sass: [
+        './web/assets/sass/pages/**/*.scss'
+    ],
+
     fonts: [
         //vendors
         './bower_components/materialize/dist/font/**/*.{ttf,woff,eof,svg}'
@@ -37,7 +42,7 @@ var config = {
 
 /**
  * Scripts Task
- **/
+ */
 gulp.task('scripts', function () {
     gulp.src(config.scripts)
         .pipe(plumber())
@@ -48,7 +53,7 @@ gulp.task('scripts', function () {
 
 /**
  * CSS Task
- **/
+ */
 gulp.task('css', function () {
     gulp.src(config.css)
         .pipe(plumber())
@@ -58,8 +63,18 @@ gulp.task('css', function () {
 });
 
 /**
+ * SASS Task
+ */
+gulp.task('sass', function(){
+    gulp.src(config.sass)
+        .pipe(plumber())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(config.dest + '/sass'));
+});
+
+/**
  * Fonts Task
- **/
+ */
 gulp.task('fonts', function () {
     gulp.src(config.fonts)
         .pipe(gulp.dest(config.dest + '/font'));
@@ -67,10 +82,14 @@ gulp.task('fonts', function () {
 
 /**
  * Watch changes and re run tasks
- * */
+ */
 gulp.task('watch', function () {
     watch(config.css, function () {
         gulp.start('css');
+    });
+
+    watch(config.sass, function () {
+        gulp.start('sass');
     });
 
     watch(config.scripts, function () {
@@ -84,5 +103,5 @@ gulp.task('watch', function () {
 
 /**
  * Default Task
- **/
-gulp.task('default', ['scripts', 'css', 'fonts', 'watch']);
+ */
+gulp.task('default', ['scripts', 'css', 'sass','fonts', 'watch']);
