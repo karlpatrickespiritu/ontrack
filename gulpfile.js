@@ -27,11 +27,15 @@ var config = {
     css: [
         // vendors
         './bower_components/normalize.css/normalize.css',
-        './bower_components/materialize/dist/css/materialize.min.css'
     ],
 
     sass: [
-        './web/assets/sass/pages/**/*.scss'
+        // app
+        // './web/assets/sass/**/**/*.scss',
+        './web/assets/sass/override.scss',
+
+        // vendor
+        './bower_components/materialize/sass/materialize.scss'
     ],
 
     fonts: [
@@ -52,6 +56,18 @@ gulp.task('scripts', function () {
 });
 
 /**
+ * Converting SASS files to CSS Task
+ */
+gulp.task('sass', function(){
+    gulp.src(config.sass)
+        .pipe(plumber())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(concat('app.min.css'))
+        .pipe(minifyCss())
+        .pipe(gulp.dest(config.dest + '/css'));
+});
+
+/**
  * CSS Task
  */
 gulp.task('css', function () {
@@ -60,16 +76,6 @@ gulp.task('css', function () {
         .pipe(concat('app.min.css'))
         .pipe(minifyCss())
         .pipe(gulp.dest(config.dest + '/css'));
-});
-
-/**
- * SASS Task
- */
-gulp.task('sass', function(){
-    gulp.src(config.sass)
-        .pipe(plumber())
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(config.dest + '/sass'));
 });
 
 /**
@@ -104,4 +110,4 @@ gulp.task('watch', function () {
 /**
  * Default Task
  */
-gulp.task('default', ['scripts', 'css', 'sass','fonts', 'watch']);
+gulp.task('default', ['scripts', 'sass', 'css', 'fonts', 'watch']);
