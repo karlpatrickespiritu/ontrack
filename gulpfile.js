@@ -31,11 +31,11 @@ var config = {
 
     sass: [
         // app
-        // './web/assets/sass/**/**/*.scss',
-        './web/assets/sass/override.scss',
+        './web/assets/sass/**/**/*.scss'
+    ],
 
-        // vendor
-        './bower_components/materialize/sass/materialize.scss'
+    materializecssSass: [
+        './bower_components/materialize/sass/**/**/*.scss'
     ],
 
     fonts: [
@@ -43,6 +43,26 @@ var config = {
         './bower_components/materialize/dist/font/**/*.{ttf,woff,eof,svg}'
     ]
 }
+
+/**
+ * Since I can't override Materializecss' sass defaults using another sass file (with gulp-sass).
+ * I'm Just going to copy their sass varialbes on my project :/
+ *
+ * TODO: find a way to override default materializecss's sass variables usign another sass file.
+ *
+ */
+gulp.task('copy-materialize-sass', function () {
+    gulp.src(config.materializecssSass)
+        .pipe(gulp.dest(config.dest + '/sass/materializecss'));
+});
+
+/**
+ * Fonts Task
+ */
+gulp.task('fonts', function () {
+    gulp.src(config.fonts)
+        .pipe(gulp.dest(config.dest + '/font'));
+});
 
 /**
  * Scripts Task
@@ -79,14 +99,6 @@ gulp.task('css', function () {
 });
 
 /**
- * Fonts Task
- */
-gulp.task('fonts', function () {
-    gulp.src(config.fonts)
-        .pipe(gulp.dest(config.dest + '/font'));
-});
-
-/**
  * Watch changes and re run tasks
  */
 gulp.task('watch', function () {
@@ -110,4 +122,4 @@ gulp.task('watch', function () {
 /**
  * Default Task
  */
-gulp.task('default', ['scripts', 'sass', 'css', 'fonts', 'watch']);
+gulp.task('default', ['copy-materialize-sass', 'scripts', 'sass', 'css', 'fonts', 'watch']);
