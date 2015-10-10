@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     watch = require('gulp-watch'),
     minifyCss = require('gulp-minify-css'),
     sass = require('gulp-sass'),
-    del = require('del');
+    del = require('del'),
+    livereload = require('gulp-livereload');
 
 var config = {
     dest: 'web/assets',
@@ -58,7 +59,8 @@ gulp.task('clean', function() {
  */
 gulp.task('fonts', function () {
     gulp.src(config.fonts)
-        .pipe(gulp.dest(config.dest + '/font'));
+        .pipe(gulp.dest(config.dest + '/font'))
+        .pipe(livereload({ start: true }));
 });
 
 /**
@@ -69,7 +71,8 @@ gulp.task('scripts', function () {
         .pipe(plumber())
         .pipe(concat('app.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(config.dest + '/js'));
+        .pipe(gulp.dest(config.dest + '/js'))
+        .pipe(livereload({ start: true }));
 });
 
 /**
@@ -81,7 +84,8 @@ gulp.task('sass', function() {
         .pipe(sass().on('error', sass.logError))
         .pipe(concat('app.min.css'))
         .pipe(minifyCss())
-        .pipe(gulp.dest(config.dest + '/css'));
+        .pipe(gulp.dest(config.dest + '/css'))
+        .pipe(livereload({ start: true }));
 });
 
 /**
@@ -92,16 +96,18 @@ gulp.task('css', function () {
         .pipe(plumber())
         .pipe(concat('app.min.css'))
         .pipe(minifyCss())
-        .pipe(gulp.dest(config.dest + '/css'));
+        .pipe(gulp.dest(config.dest + '/css'))
+        .pipe(livereload({ start: true }));
 });
 
 /**
  * Watch changes and re run tasks
  */
 gulp.task('watch', function () {
+    livereload.listen();
+
     watch(config.sass.watch, function () {
-        console.log('sass watched :(')
-        // gulp.start('sass');
+        gulp.start('sass');
     });
 
     watch(config.css, function () {
