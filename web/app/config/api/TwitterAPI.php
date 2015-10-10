@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Twitter configuration constants
+ * Twitter configuration constants.
+ * TODO: transfer these sensitive files to AWS using heroku.
  *
  * @author karlpatrickespiritu <https://github.com/karlpatrickespiritu>, <wiwa.espiritu@gmail.com>
  */

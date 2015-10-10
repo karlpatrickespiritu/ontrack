@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     watch = require('gulp-watch'),
     minifyCss = require('gulp-minify-css'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    del = require('del');
 
 var config = {
     dest: 'web/assets',
@@ -18,10 +19,7 @@ var config = {
         './node_modules/mustache/mustache.min.js',
 
         // app
-        './web/assets/js/config/**/*.js',
-        './web/assets/js/controllers/**/*.js',
-        './web/assets/js/services/**/*.js',
-        './web/assets/js/pages/**/*.js'
+        './web/assets/js/app/**/**/*.js'
     ],
 
     css: [
@@ -29,14 +27,12 @@ var config = {
         './bower_components/normalize.css/normalize.css',
     ],
 
-    sass: [
-        // app
-        './web/assets/sass/build.scss'
-    ],
-
-    materializecssSass: [
-        './bower_components/materialize/sass/**/**/*.scss'
-    ],
+    sass: {
+        build: './web/assets/sass/build.scss',
+        watch: [
+            './web/assets/sass/**/**/**/**/*.scss',
+        ]
+    },
 
     fonts: [
         //vendors
@@ -45,15 +41,16 @@ var config = {
 }
 
 /**
- * Since I can't override Materializecss' sass defaults using another sass file (with gulp-sass).
- * I'm Just going to copy their sass varialbes on my project :/
- *
- * TODO: find a way to override default materializecss's sass variables usign another sass file.
- *
+ * Clean files and folders
  */
-gulp.task('copy-materialize-sass', function () {
-    gulp.src(config.materializecssSass)
-        .pipe(gulp.dest(config.dest + '/sass/materializecss'));
+gulp.task('clean', function() {
+    del([
+        './web/assets/css/app.min.css',
+        './web/assets/js/app.min.js',
+        './web/assets/font/**/*.{ttf,woff,eof,svg}'
+    ]).then(function (paths) {
+        // console.log('Deleted files/folders: \n', paths.join('\n'));
+    });
 });
 
 /**
@@ -78,8 +75,8 @@ gulp.task('scripts', function () {
 /**
  * Converting SASS files to CSS Task
  */
-gulp.task('sass', function(){
-    gulp.src(config.sass)
+gulp.task('sass', function() {
+    gulp.src(config.sass.build)
         .pipe(plumber())
         .pipe(sass().on('error', sass.logError))
         .pipe(concat('app.min.css'))
@@ -102,12 +99,13 @@ gulp.task('css', function () {
  * Watch changes and re run tasks
  */
 gulp.task('watch', function () {
-    watch(config.css, function () {
-        gulp.start('css');
+    watch(config.sass.watch, function () {
+        console.log('sass watched :(')
+        // gulp.start('sass');
     });
 
-    watch(config.sass, function () {
-        gulp.start('sass');
+    watch(config.css, function () {
+        gulp.start('css');
     });
 
     watch(config.scripts, function () {
@@ -122,4 +120,11 @@ gulp.task('watch', function () {
 /**
  * Default Task
  */
-gulp.task('default', ['copy-materialize-sass', 'scripts', 'sass', 'css', 'fonts', 'watch']);
+gulp.task('default', [
+    'clean',
+    'fonts',
+    'sass',
+    'css',
+    'scripts',
+    'watch'
+]);
