@@ -31,7 +31,7 @@ var config = {
 
     sass: [
         // app
-        './web/assets/sass/**/**/*.scss'
+        './web/assets/sass/build.scss'
     ],
 
     materializecssSass: [
