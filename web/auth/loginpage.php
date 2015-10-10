@@ -10,6 +10,6 @@ if (TwitterHandler::i()->hasLoggedIn()) {
     URL::redirect('/');
 }
 
-$sContent = MustacheHandler::i()->render('login/loginform');
+$sContent = MustacheHandler::i()->render('login/index');
 
 MustacheHandler::i()->show('build', ['content' => $sContent]);

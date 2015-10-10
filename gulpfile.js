@@ -38,6 +38,10 @@ var config = {
     fonts: [
         //vendors
         './bower_components/materialize/dist/font/**/*.{ttf,woff,eof,svg}'
+    ],
+
+    mustache: [
+        './web/app/views/**/**/**/*.mustache'
     ]
 }
 
@@ -101,6 +105,14 @@ gulp.task('css', function () {
 });
 
 /**
+ * Mustache page views
+ */
+gulp.task('mustache', function () {
+    gulp.src(config.mustache)
+        .pipe(livereload({ start: true }));
+});
+
+/**
  * Watch changes and re run tasks
  */
 gulp.task('watch', function () {
@@ -112,6 +124,10 @@ gulp.task('watch', function () {
 
     watch(config.css, function () {
         gulp.start('css');
+    });
+
+    watch(config.mustache, function() {
+        gulp.start('mustache');
     });
 
     watch(config.scripts, function () {
@@ -131,6 +147,7 @@ gulp.task('default', [
     'fonts',
     'sass',
     'css',
+    'mustache',
     'scripts',
     'watch'
 ]);
