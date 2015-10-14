@@ -1,14 +1,9 @@
-'use strict';
-(function (window, $, document) {
+(function (window, $) {
+	"use strict";
+	
     $(function () {
-        var $page = $('#homepage'),
-        	oFeeds = {};
+        var $page = $('#homepage');
 
-        TwitterFeedService
-        	.getFeed()
-        	.then(function(response) {
-        		oFeeds = response;
-        	});
-
+        console.log(ontrack);
     });
-}(window, window.jQuery, document));
+}(window, window.jQuery));

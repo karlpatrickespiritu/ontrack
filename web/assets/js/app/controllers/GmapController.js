@@ -1,9 +1,12 @@
-(function(controllers, $) {
+(function(app, $) {
     "use strict";
+    
+    // single-variable pattern | localize variables
+    app.controllers = app.controllers || {};
 
-    controllers.GmapController = (function() {
+    app.controllers.GmapController = (function() {
 
-        var GmapController = controllers.GmapController,
+        var GmapController = app.controllers.GmapController, // cached parent
             $map = $('#map'), 	    // the DOM element map
             oUserGeoDefaults = {    // temporary defaults if browser/OS doesn't support geolocation. TODO:: find a way
                 iLat: 10.3028159,
@@ -31,8 +34,8 @@
                         });
                     }
                 })
-                .fail(function(res) {
-                    console.log(res);
+                .fail(function(reason) {
+                    console.log(reason);
                 });
         };
 
@@ -44,4 +47,4 @@
         }
     })(); // end of controller
 
-}(window.app.controllers = window.app.controllers || {}, jQuery));
+}(window.ontrack = window.ontrack || {}, jQuery));
