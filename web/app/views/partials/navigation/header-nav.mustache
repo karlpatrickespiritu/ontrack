@@ -1,25 +1,36 @@
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-    <li><a href="#!" class="">one</a></li>
-    <li><a href="#!" class="">two</a></li>
+    <li><a href="#!" class="">option 1</a></li>
+    <li><a href="#!" class="">option 2</a></li>
     <li class="divider"></li>
     <li><a href="/logout" class="">Logout</a></li>
 </ul>
+
 <nav>
-    <div class="nav-wrapper white">
+    <div class="nav-wrapper">
         <a href="/" class="brand-logo center">
-            <img src="/assets/img/social-icons/twitter.png" alt="logo" width="30" style="position: relative;top: 5px;"> ontrack
+            <img src="/assets/img/social-icons/twitter2.png" alt="logo" width="30" style="position: relative;top: 5px;"> ontrack
         </a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <!-- Dropdown Trigger -->
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Username<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+            <!-- Dropdown Trigger -->
+            <li><a href="#!" class="">option 1</a></li>
+            <li><a href="#!" class="">option 2</a></li>
+            <li class="divider"></li>
+            <li><a href="/logout" class="">Logout</a></li>
         </ul>
     </div>
 </nav>
 
 
 <script>
+    // TODO: must be in a global script
     $(document).ready(function(){
+        $(".button-collapse").sideNav();
         $(".dropdown-button").dropdown();
     })
 </script>

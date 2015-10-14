@@ -16,5 +16,4 @@ var TwitterFeedService = (function () {
 
     	 return $deferred.promise();
     }
-
 })();

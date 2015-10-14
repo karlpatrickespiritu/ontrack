@@ -74,7 +74,7 @@ gulp.task('scripts', function () {
     gulp.src(config.scripts)
         .pipe(plumber())
         .pipe(concat('app.min.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest(config.dest + '/js'))
         .pipe(livereload({ start: true }));
 });
