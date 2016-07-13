@@ -1,2 +1,2 @@
 # ontrack
-An app made with :heart: using Twitter API.. Coming Soon :relaxed:
+An app made using Twitter API.. Coming Soon
